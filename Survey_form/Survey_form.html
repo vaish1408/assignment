@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #f3eded;
+            border: 1px solid #c1bcbc;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="checkbox"] {
+            margin-top: 5px;
+            margin-right: 5px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button[type="button"] {
+            background-color: #f44336;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <form id="surveyForm" onsubmit="submitForm(); return false;">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" required>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" required>
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" required>
+
+        <label for="country">Country:</label>
+        <select id="country" required>
+            <option value="select">_ _ Select Country _ _</option>
+            <option value="India">India</option>
+            <option value="Japan">Japan</option>
+            <option value="USA">USA</option>
+            <option value="Canada">Canada</option>
+           
+        </select>
+        <fieldset>      
+        <legend>  <label>Gender:</label> </legend>
+        <input type="checkbox" id="male" name="gender"> <label for="male">Male</label>
+        <input type="checkbox" id="female" name="gender"> <label for="female">Female</label>
+        <input type="checkbox" id="other" name="gender"> <label for="other">Other</label>
+        </fieldset>
+
+        <label for="profession">Profession:</label>
+        <input type="text" id="profession" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+
+        <label for="mobile">Mobile Number:</label>
+        <input type="tel" id="mobile" required>
+
+        <button type="submit">Submit</button>
+        <button type="button" onclick="resetForm()">Reset</button>
+    </form>
+
+    <script>
+        function submitForm() {
+           
+            alert("Submitted!\n\n" +
+                  "First Name: " + document.getElementById("firstName").value + "\n" +
+                  "Last Name: " + document.getElementById("lastName").value + "\n" +
+                  "Date of Birth: " + document.getElementById("dob").value + "\n" +
+                  "Country: " + document.getElementById("country").value + "\n" +
+                  "Gender: " + getSelectedGender() + "\n" +
+                  "Profession: " + document.getElementById("profession").value + "\n" +
+                  "Email: " + document.getElementById("email").value + "\n" +
+                  "Mobile Number: " + document.getElementById("mobile").value);
+
+            document.getElementById("surveyForm").reset();
+        }
+
+        function resetForm() {
+            document.getElementById("surveyForm").reset();
+        }
+
+        function getSelectedGender() {
+            const checkboxes = document.querySelectorAll('input[name="gender"]:checked');
+            const selectedGenders = Array.from(checkboxes).map(checkbox => checkbox.nextElementSibling.innerText);
+            return selectedGenders.join(', ');
+        }
+    </script>
+</body>
+</html>
